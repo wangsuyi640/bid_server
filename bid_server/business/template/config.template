@@ -1,0 +1,5 @@
+bid_no={{ bid_no }}
+password={{ password }}
+udp_secondary={{ udp_secondary }}
+create_time={{ create_time }}
+expire_time={{ expire_time }}

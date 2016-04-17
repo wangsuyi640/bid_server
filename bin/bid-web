@@ -1,0 +1,7 @@
+# *_* coding=utf8 *_*
+#!/usr/bin/env python
+
+from bid_server.business import web
+
+if __name__ == '__main__':
+    web.start()

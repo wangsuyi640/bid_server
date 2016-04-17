@@ -1,0 +1,8 @@
+# *_* coding=utf8 *_*
+#!/usr/bin/env python
+
+from bid_server.udp import server
+
+if __name__ == '__main__':
+    server.YayaUDPServer().start()
+    server.wait()

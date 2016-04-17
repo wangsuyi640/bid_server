@@ -1,0 +1,6 @@
+{% for error in handler.prompts['error'] %}
+	<div class="alert alert-danger">{{ error }}</div>
+{% end %}
+{% for info in handler.prompts['info'] %}
+	<div class="alert alert-info">{{ info }}</div>
+{% end %}

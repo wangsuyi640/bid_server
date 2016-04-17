@@ -1,0 +1,47 @@
+{% extends "../panel.html" %}
+
+{% block title %}添加用户{% end block %}
+
+{% block page_title%}<h2>添加用户</h2>{% end %}
+
+{% block main %}
+
+<div class="col-sm-8">
+	{% include "../prompts.html" %}
+	<form class="form-horizontal" role="form" method="POST" action="{{ request.path }}">
+		<div class="form-group">
+			<label for="inputUsername" class="col-sm-3 control-label">用户名</label>
+			<div class="col-sm-6">
+				<input name="username" type="text" class="form-control" id="inputUsername" placeholder="用户名" required autofocus>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword" class="col-sm-3 control-label">密码</label>
+			<div class="col-sm-6">
+				<input name="password" type="password" class="form-control" id="inputPassword" placeholder="密码" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputRemark" class="col-sm-3 control-label">用户备注</label>
+			<div class="col-sm-6">
+				<input name="remark" type="text" class="form-control" id="inputPassword" placeholder="用户备注" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-6">
+				<div class="checkbox">
+					<label>
+						<input name="is_admin" type="checkbox">是否为管理员
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-6">
+				<button type="submit" class="btn btn-default">确定</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% end %}

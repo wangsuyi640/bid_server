@@ -1,0 +1,54 @@
+{% extends "../panel.html" %}
+
+{% block title %}用户管理{% end block %}
+
+{% block page_title%}<h2>用户管理</h2>{% end %}
+
+{% block main %}
+{% include "../prompts.html" %}
+<div>
+	<p style="text-align:right;">
+		<a href="/admin/add_user" class="btn btn-primary active" role="button">添加用户</a>
+	</p>
+</div>
+<table class="table table-condensed">
+	<tr>
+		<th>用户名</th>
+		<th>是否是管理员</th>
+		<th>状态</th>
+		<th>下载证书条目数</th>
+		<th>备注</th>
+		<th>用户创建时间</th>
+		<th>操作</th>
+	</tr>
+	{% for user in users %}
+		<tr>
+			<td>{{ user.User.username }}</td>
+			<td>
+				{% if user.User.is_admin %}
+					<span style="color:red;">Y</span> 
+				{% else %}
+					<span style="color:grey;">N</span>
+				{% end %}
+			</td>
+			<td>
+				{% if user.User.status == 0 %}
+					<span style="color:green;">正常</span>
+				{% else %}
+					<span style="color:red;">禁用</span>
+				{% end %}
+			</td>
+			<td>
+				<a href="/license_records?user_id={{ user.User.user_id }}" title="点击查看详细">
+					{{ user.download_license_count }}
+				</a>
+			</td>
+			<td>{{ user.User.remark }}</td>
+			<td>{{ user.User.create_time }}</td>
+			<td>
+				<a href="/admin/modify_user?user_id={{ user.User.user_id }}">修改用户</a>
+			</td>
+		</tr>
+	{% end %}
+</table>
+{% end %}

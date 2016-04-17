@@ -1,0 +1,76 @@
+# *_* coding=utf8 *_*
+#!/usr/bin/env python
+
+from __future__ import with_statement
+
+import time
+from SimpleXMLRPCServer import SimpleXMLRPCServer
+from SimpleXMLRPCServer import SimpleXMLRPCRequestHandler
+import SocketServer
+from bid_server.sdk.daemon import Daemon
+from bid_server import log
+from bid_server.api import RpcAPI
+from bid_server import app_config
+from bid_server import config
+
+
+LOG = log.get_logger(__name__)
+
+RpcAPI.import_api()
+
+
+class SimpleAsyncXMLRPCServer(SocketServer.ThreadingMixIn, SimpleXMLRPCServer):
+    pass
+
+
+class rsfserver(Daemon):
+
+    def __init__(
+        self, ListenPort=config.RPC_PORT, pidfile='/tmp/simple_rpc.pid',
+        stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'
+    ):
+        Daemon.__init__(
+            self, pidfile, stdin=stdin, stdout=stdout, stderr=stderr)
+        self.quit = 0
+        self.ListenPort = ListenPort
+
+    def register_rpc_functions(self):
+        rpc_funcs = RpcAPI.get_all_funcs()
+        for name,func_handler in rpc_funcs.iteritems():
+            self.server.register_function(func_handler, name)
+
+    def StartServer(self):
+
+        class RequestHandler(SimpleXMLRPCRequestHandler):
+
+            def __init__(self, request, client_address, server):
+                """
+                Called for each incoming connection to kick off a request handler.
+                """
+                SimpleXMLRPCRequestHandler.__init__(
+                    self, request, client_address, server)
+
+        self.server = SimpleAsyncXMLRPCServer(
+            ('0.0.0.0', self.ListenPort), requestHandler=RequestHandler,
+            logRequests=False, allow_none=True
+        )
+        self.register_rpc_functions()
+
+    def run(self):
+        """
+        Run function for the daemon.
+        Prepares and starts the server and handles any requests made to the server.
+        """
+        self.StartServer()
+        while not self.quit:
+            self.server.handle_request()
+
+if __name__ == '__main__':
+    price = app_config.get("price", None)
+    update_time = app_config.get("update_time", None)
+    if not price:
+        app_config.set("price", 82600, 1)
+    if not update_time:
+        app_config.set("update_time", time.strftime('%H:%M:%S'), 1)
+    daemon = rsfserver()
+    daemon.start()

@@ -1,0 +1,140 @@
+{% extends "../panel.html" %}
+
+{% block title %}程序参数配置{% end block %}
+
+{% block page_title%}<h2>程序参数配置</h2>{% end %}
+
+{% block main %}
+{% from bid_server import app_config %}
+{% include "../prompts.html" %}
+<table class="table">
+	<tr>
+		<th>配置项</th>
+		<th></th>
+	</tr>
+		<tr>
+			<td>Sencondary UDP Server</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="udp_secondary_server">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('udp_secondary_server', '127.0.0.1:990') }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+            <td>
+            <td>
+		</tr>
+		<tr>
+			<td>Login URL</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="login_url">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('login_url', 'http://www.baidu.com') }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+
+			<td>BID URL</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="bid_url">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('bid_url', 'http://www.baidu.com') }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>priceInputRight</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="priceInputRight">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('priceInputRight', 0) }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+
+			<td>priceInputBottom</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="priceInputBottom">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('priceInputBottom', 0) }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+		</tr>
+        <tr>
+			<td>preBidRight</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="preBidRight">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('preBidRight', 0) }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+
+			<td>preBidBottom</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="preBidBottom">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('preBidBottom', 0) }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+		</tr>
+        <tr>
+			<td>bidRight</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="bidRight">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('bidRight', 0) }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+
+			<td>bidBottom</td>
+			<td>
+				<form class="form-inline" role="form" method="POST" action="{{ request.path }}">
+					<input type="hidden" name="key" value="bidBottom">
+					<div class="form-group">
+						<input type="text" class="form-control" name="value" value="{{ app_config.get('bidBottom', 0) }}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">修改</button>
+					</div>
+				</form>
+			</td>
+		</tr>
+</table>
+{% end %}

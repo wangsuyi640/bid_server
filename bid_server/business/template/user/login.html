@@ -1,0 +1,12 @@
+{% extends "../layout.html" %}
+{% block title %}登录{% end block %}
+
+{% block body %}
+<form class="form-signin" role="form" method="POST" action="{{ request.path }}">
+	{% include "../prompts.html" %}
+	<h2 class="form-signin-heading">登录</h2>
+	<input name="username" type="text" class="form-control" placeholder="用户名" required autofocus>
+	<input name="password" type="password" class="form-control" placeholder="密码" required>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+</form>
+{% end block %}

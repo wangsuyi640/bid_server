@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<p class="navbar-text">用户名：{{ handler.user['username'] }}</p>
+				</li>
+				<li>
+					<a href="/modify_password">修改密码</a>
+				</li>
+				<li>
+					<a href="/logout">注销</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a href="/">从这里开始</a>
+				</li>
+			</ul>
+			{% if handler.user['is_admin'] %}
+			<!--<ul class="nav nav-pills nav-stacked">-->
+				<!--<li>-->
+					<!--<a href="/admin/user">用户管理</a>-->
+				<!--</li>-->
+			<!--</ul>-->
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a href="/admin/app_config">程序参数配置</a>
+				</li>
+			</ul>
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a href="/admin/testinfo_config">测试信息配置</a>
+				</li>
+			</ul>
+			{% end %}
+		</div>
+		<div class="col-md-10">
+			<div class="page_hader">
+				{% block page_title %}{% end %}
+			</div>
+			{% block main %}
+			{% end %}
+		</div>
+	</div>
+{% end %}
